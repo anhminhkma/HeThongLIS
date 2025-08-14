@@ -1,44 +1,44 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
+  Users,
+  TestTube,
+  FileText,
+  AlertTriangle,
+  Search,
+  Bell,
+  Settings,
+  Activity,
+  BarChart3,
   PieChart,
-  Pie,
-  Cell,
-  LineChart,
-  Line,
-  Legend,
-} from "recharts"
-import { Users, TestTube, FileText, AlertTriangle, Search, Bell, Settings } from "lucide-react"
+  TrendingUp,
+} from "lucide-react"
 
 // Sample data for charts
 const dailySampleData = [
-  { day: "Thứ Hai", samples: 180 },
-  { day: "Thứ Ba", samples: 320 },
-  { day: "Thứ Tư", samples: 380 },
-  { day: "Thứ Năm", samples: 280 },
-  { day: "Thứ Sáu", samples: 500 },
-  { day: "Thứ Bảy", samples: 280 },
-  { day: "Chủ Nhật", samples: 450 },
+  { day: "Thứ Hai", samples: 180, percentage: 36 },
+  { day: "Thứ Ba", samples: 320, percentage: 64 },
+  { day: "Thứ Tư", samples: 380, percentage: 76 },
+  { day: "Thứ Năm", samples: 280, percentage: 56 },
+  { day: "Thứ Sáu", samples: 500, percentage: 100 },
+  { day: "Thứ Bảy", samples: 280, percentage: 56 },
+  { day: "Chủ Nhật", samples: 450, percentage: 90 },
 ]
 
 const testTypeData = [
-  { name: "Huyết học", value: 45, color: "#0891b2" },
-  { name: "Sinh hóa", value: 35, color: "#f59e0b" },
-  { name: "Vi sinh", value: 20, color: "#6b7280" },
+  { name: "Huyết học", value: 45, color: "bg-primary-500" },
+  { name: "Sinh hóa", value: 35, color: "bg-warning-500" },
+  { name: "Vi sinh", value: 20, color: "bg-success-500" },
 ]
 
 const sampleTypeData = [
-  { name: "Máu", value: 40, color: "#0891b2" },
-  { name: "Nước tiểu", value: 25, color: "#f59e0b" },
-  { name: "Phân", value: 15, color: "#10b981" },
-  { name: "Khác", value: 20, color: "#6b7280" },
+  { name: "Máu", value: 40, color: "bg-primary-500" },
+  { name: "Nước tiểu", value: 25, color: "bg-warning-500" },
+  { name: "Phân", value: 15, color: "bg-success-500" },
+  { name: "Khác", value: 20, color: "bg-purple-500" },
 ]
 
 const monthlyTrendData = [
@@ -53,173 +53,290 @@ const monthlyTrendData = [
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <header className="glass-effect sticky top-0 z-50 px-6 py-4 border-b border-primary-200/30">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <TestTube className="h-8 w-8 text-cyan-600" />
-              <h1 className="text-2xl font-bold text-gray-900">G-LIS</h1>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3">
+              <div className="icon-bg-primary">
+                <TestTube className="h-6 w-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold gradient-heading">G-LIS</h1>
+                <p className="text-xs text-gray-500">Laboratory Information System</p>
+              </div>
             </div>
-            <nav className="hidden md:flex space-x-6">
-              <Button variant="ghost" className="text-cyan-600 font-medium">
+            <nav className="hidden lg:flex space-x-2">
+              <Button variant="ghost" className="nav-item nav-item-active">
+                <Activity className="h-4 w-4 mr-2" />
                 Dashboard
               </Button>
-              <Button variant="ghost" className="text-gray-600" asChild>
-                <Link href="/patients">Quản lý bệnh nhân</Link>
+              <Button variant="ghost" className="nav-item" asChild>
+                <Link href="/sample-collection">
+                  <TestTube className="h-4 w-4 mr-2" />
+                  Tiếp nhận mẫu
+                </Link>
               </Button>
-              <Button variant="ghost" className="text-gray-600" asChild>
-                <Link href="/test-results">Quản lý kết quả</Link>
+              <Button variant="ghost" className="nav-item" asChild>
+                <Link href="/patients">
+                  <Users className="h-4 w-4 mr-2" />
+                  Quản lý bệnh nhân
+                </Link>
               </Button>
-              <Button variant="ghost" className="text-gray-600" asChild>
-                <Link href="/sample-collection">Tiếp nhận bệnh phẩm</Link>
+              <Button variant="ghost" className="nav-item" asChild>
+                <Link href="/quality-control">
+                  <AlertTriangle className="h-4 w-4 mr-2" />
+                  Kiểm soát chất lượng
+                </Link>
               </Button>
-              <Button variant="ghost" className="text-gray-600" asChild>
-                <Link href="/quality-control">Kiểm soát chất lượng</Link>
+              <Button variant="ghost" className="nav-item" asChild>
+                <Link href="/test-results">
+                  <FileText className="h-4 w-4 mr-2" />
+                  Kết quả xét nghiệm
+                </Link>
               </Button>
-              <Button variant="ghost" className="text-gray-600" asChild>
-                <Link href="/reports">Báo cáo & Thống kê</Link>
+              <Button variant="ghost" className="nav-item" asChild>
+                <Link href="/reports">
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Báo cáo & Thống kê
+                </Link>
               </Button>
             </nav>
           </div>
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" size="sm" className="hover:bg-primary-50 hover:border-primary-300 bg-transparent">
               <Search className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="hover:bg-primary-50 hover:border-primary-300 relative bg-transparent"
+            >
               <Bell className="h-4 w-4" />
+              <span className="absolute -top-1 -right-1 h-3 w-3 bg-danger-500 rounded-full animate-pulse-soft"></span>
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="hover:bg-primary-50 hover:border-primary-300 bg-transparent">
               <Settings className="h-4 w-4" />
             </Button>
-            <div className="text-sm text-gray-600">
-              Đăng nhập: <span className="font-medium">Admin</span>
+            <div className="flex items-center space-x-2 pl-4 border-l border-gray-200">
+              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                A
+              </div>
+              <div className="text-sm">
+                <div className="font-medium text-gray-900">Admin</div>
+                <div className="text-gray-500">Quản trị viên</div>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="p-6">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
+      <main className="p-6 space-y-8">
+        {/* Enhanced Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
+          <Card className="card-glow border-l-4 border-l-primary-500 bg-gradient-to-br from-white to-primary-50/30">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Tổng số bệnh nhân</CardTitle>
-              <Users className="h-4 w-4 text-cyan-600" />
+              <div className="icon-bg-primary">
+                <Users className="h-4 w-4" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">3545</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">3,545</div>
+              <p className="text-xs text-primary-600 font-medium">↗ +12% so với tháng trước</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="card-glow border-l-4 border-l-warning-500 bg-gradient-to-br from-white to-warning-50/30">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Tổng số bệnh phẩm</CardTitle>
-              <TestTube className="h-4 w-4 text-cyan-600" />
+              <div className="icon-bg-warning">
+                <TestTube className="h-4 w-4" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">4575</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">4,575</div>
+              <p className="text-xs text-warning-600 font-medium">↗ +8% so với tháng trước</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="card-glow border-l-4 border-l-success-500 bg-gradient-to-br from-white to-success-50/30">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Tổng số xét nghiệm</CardTitle>
-              <FileText className="h-4 w-4 text-cyan-600" />
+              <div className="icon-bg-success">
+                <FileText className="h-4 w-4" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">4575</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">4,575</div>
+              <p className="text-xs text-success-600 font-medium">↗ +15% so với tháng trước</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="card-glow border-l-4 border-l-danger-500 bg-gradient-to-br from-white to-danger-50/30">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">TAT trung bình</CardTitle>
-              <AlertTriangle className="h-4 w-4 text-amber-500" />
+              <div className="icon-bg-danger">
+                <AlertTriangle className="h-4 w-4" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">14</div>
+              <div className="text-3xl font-bold text-gray-900 mb-1">
+                14<span className="text-lg text-gray-500">h</span>
+              </div>
+              <p className="text-xs text-danger-600 font-medium">↘ -5% so với tháng trước</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-slide-up">
           {/* Daily Samples Bar Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Số lượng mẫu theo ngày</CardTitle>
+          <Card className="card-hover chart-container">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-bold gradient-heading flex items-center">
+                <div className="icon-bg-primary mr-3">
+                  <BarChart3 className="h-5 w-5" />
+                </div>
+                Số lượng mẫu theo ngày
+              </CardTitle>
+              <p className="text-sm text-gray-500">Thống kê 7 ngày gần nhất</p>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={dailySampleData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Bar dataKey="samples" fill="#0891b2" />
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {dailySampleData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3 w-24">
+                      <span className="text-sm font-medium text-gray-700">{item.day}</span>
+                    </div>
+                    <div className="flex-1 mx-4">
+                      <div className="w-full bg-gray-200 rounded-full h-3 relative overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-primary-500 to-primary-600 h-3 rounded-full transition-all duration-1000 ease-out"
+                          style={{ width: `${item.percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div className="w-16 text-right">
+                      <span className="text-sm font-semibold text-gray-900">{item.samples}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
           {/* Test Type Distribution */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Tỷ lệ số lượng xét nghiệm các nhóm</CardTitle>
+          <Card className="card-hover chart-container">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-bold gradient-heading flex items-center">
+                <div className="icon-bg-primary mr-3">
+                  <PieChart className="h-5 w-5" />
+                </div>
+                Tỷ lệ xét nghiệm theo nhóm
+              </CardTitle>
+              <p className="text-sm text-gray-500">Phân bố theo loại xét nghiệm</p>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie data={testTypeData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} dataKey="value">
-                    {testTypeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {testTypeData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-4 h-4 rounded-full ${item.color}`}></div>
+                      <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-32 bg-gray-200 rounded-full h-2">
+                        <div
+                          className={`h-2 rounded-full ${item.color} transition-all duration-1000 ease-out`}
+                          style={{ width: `${item.value * 2}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900 w-8">{item.value}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
           {/* Sample Type Distribution */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Tỷ lệ mẫu theo đối tượng</CardTitle>
+          <Card className="card-hover chart-container">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-bold gradient-heading flex items-center">
+                <div className="icon-bg-primary mr-3">
+                  <PieChart className="h-5 w-5" />
+                </div>
+                Tỷ lệ mẫu theo loại
+              </CardTitle>
+              <p className="text-sm text-gray-500">Phân bố theo loại bệnh phẩm</p>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie data={sampleTypeData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} dataKey="value">
-                    {sampleTypeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {sampleTypeData.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-4 h-4 rounded-full ${item.color}`}></div>
+                      <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-32 bg-gray-200 rounded-full h-2">
+                        <div
+                          className={`h-2 rounded-full ${item.color} transition-all duration-1000 ease-out`}
+                          style={{ width: `${item.value * 2.5}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900 w-8">{item.value}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
           {/* Monthly Trends */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">
-                Số lượng BN xét nghiệm (dương tính, âm tính)
+          <Card className="card-hover chart-container">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-bold gradient-heading flex items-center">
+                <div className="icon-bg-primary mr-3">
+                  <TrendingUp className="h-5 w-5" />
+                </div>
+                Xu hướng kết quả xét nghiệm
               </CardTitle>
+              <p className="text-sm text-gray-500">Dương tính vs Âm tính theo tháng</p>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={monthlyTrendData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Line type="monotone" dataKey="positive" stroke="#0891b2" strokeWidth={2} name="Dương tính" />
-                  <Line type="monotone" dataKey="negative" stroke="#06b6d4" strokeWidth={2} name="Âm tính" />
-                  <Legend />
-                </LineChart>
-              </ResponsiveContainer>
+              <div className="space-y-6">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-danger-500 rounded-full"></div>
+                    <span>Dương tính</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-success-500 rounded-full"></div>
+                    <span>Âm tính</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  {monthlyTrendData.map((item, index) => (
+                    <div key={index} className="space-y-2">
+                      <div className="flex justify-between text-xs text-gray-600">
+                        <span>{item.month}</span>
+                        <span>{item.positive + item.negative} tổng</span>
+                      </div>
+                      <div className="flex space-x-1 h-4">
+                        <div
+                          className="bg-danger-500 rounded-l transition-all duration-1000 ease-out"
+                          style={{ width: `${(item.positive / (item.positive + item.negative)) * 100}%` }}
+                        ></div>
+                        <div
+                          className="bg-success-500 rounded-r transition-all duration-1000 ease-out"
+                          style={{ width: `${(item.negative / (item.positive + item.negative)) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

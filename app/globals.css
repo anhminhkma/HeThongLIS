@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -37,6 +37,51 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Added custom medical theme colors */
+  --primary-50: #f0fdfa;
+  --primary-100: #ccfbf1;
+  --primary-200: #99f6e4;
+  --primary-300: #5eead4;
+  --primary-400: #2dd4bf;
+  --primary-500: #14b8a6;
+  --primary-600: #0d9488;
+  --primary-700: #0f766e;
+  --primary-800: #115e59;
+  --primary-900: #134e4a;
+
+  --success-50: #f0fdf4;
+  --success-100: #dcfce7;
+  --success-200: #bbf7d0;
+  --success-300: #86efac;
+  --success-400: #4ade80;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+  --success-700: #15803d;
+  --success-800: #166534;
+  --success-900: #14532d;
+
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
+
+  --danger-50: #fef2f2;
+  --danger-100: #fee2e2;
+  --danger-200: #fecaca;
+  --danger-300: #fca5a5;
+  --danger-400: #f87171;
+  --danger-500: #ef4444;
+  --danger-600: #dc2626;
+  --danger-700: #b91c1c;
+  --danger-800: #991b1b;
+  --danger-900: #7f1d1d;
 }
 
 .dark {
@@ -75,6 +120,10 @@
 }
 
 @theme inline {
+  /* Added font family variables for Inter and JetBrains Mono */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -111,6 +160,51 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Added custom medical theme color utilities */
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  --color-success-50: var(--success-50);
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800);
+  --color-success-900: var(--success-900);
+
+  --color-warning-50: var(--warning-50);
+  --color-warning-100: var(--warning-100);
+  --color-warning-200: var(--warning-200);
+  --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+  --color-warning-700: var(--warning-700);
+  --color-warning-800: var(--warning-800);
+  --color-warning-900: var(--warning-900);
+
+  --color-danger-50: var(--danger-50);
+  --color-danger-100: var(--danger-100);
+  --color-danger-200: var(--danger-200);
+  --color-danger-300: var(--danger-300);
+  --color-danger-400: var(--danger-400);
+  --color-danger-500: var(--danger-500);
+  --color-danger-600: var(--danger-600);
+  --color-danger-700: var(--danger-700);
+  --color-danger-800: var(--danger-800);
+  --color-danger-900: var(--danger-900);
 }
 
 @layer base {
@@ -119,5 +213,103 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Added custom medical theme utilities */
+@layer utilities {
+  /* Glass Effect */
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+
+  /* Card Effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .card-glow {
+    @apply transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/10;
+  }
+
+  /* Icon Backgrounds */
+  .icon-bg-primary {
+    @apply w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center text-white shadow-lg;
+  }
+
+  .icon-bg-success {
+    @apply w-8 h-8 bg-gradient-to-r from-success-500 to-success-600 rounded-lg flex items-center justify-center text-white shadow-lg;
+  }
+
+  .icon-bg-warning {
+    @apply w-8 h-8 bg-gradient-to-r from-warning-500 to-warning-600 rounded-lg flex items-center justify-center text-white shadow-lg;
+  }
+
+  .icon-bg-danger {
+    @apply w-8 h-8 bg-gradient-to-r from-danger-500 to-danger-600 rounded-lg flex items-center justify-center text-white shadow-lg;
+  }
+
+  /* Navigation Items */
+  .nav-item {
+    @apply px-4 py-2 rounded-lg transition-all duration-200 hover:bg-primary-50 hover:text-primary-700 font-medium;
+  }
+
+  .nav-item-active {
+    @apply bg-primary-100 text-primary-700 shadow-sm;
+  }
+
+  /* Gradient Headings */
+  .gradient-heading {
+    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    @apply bg-gradient-to-br from-white to-gray-50/50 border border-gray-100;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseSoft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
   }
 }
