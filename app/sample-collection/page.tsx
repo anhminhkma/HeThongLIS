@@ -94,7 +94,11 @@ const getStatusText = (status: string) => {
 }
 
 export default function SampleCollectionPage() {
-  const [selectedDate, setSelectedDate] = useState("19/08/2024")
+  const [selectedDate, setSelectedDate] = useState("2024-08-19")
+  const [receptionCode, setReceptionCode] = useState("240819000001")
+  const [supplierName, setSupplierName] = useState("")
+  const [selectedService, setSelectedService] = useState("")
+  const [otherPerson, setOtherPerson] = useState("")
   const [notes, setNotes] = useState("")
 
   return (
@@ -217,23 +221,32 @@ export default function SampleCollectionPage() {
                 <label className="text-sm font-medium text-gray-600 mb-2 block">Ngày tiếp nhận *</label>
                 <div className="relative">
                   <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input type="date" value="2024-08-19" className="pl-10" />
+                  <Input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="pl-10"
+                  />
                 </div>
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-600 mb-2 block">Mã tiếp nhận *</label>
-                <Input placeholder="Mã tiếp nhận" value="240819000001" readOnly className="bg-gray-50" />
+                <Input placeholder="Mã tiếp nhận" value={receptionCode} readOnly className="bg-gray-50" />
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-600 mb-2 block">Tên nhà cung cấp</label>
-                <Input placeholder="Tên nhà cung cấp" />
+                <Input
+                  placeholder="Tên nhà cung cấp"
+                  value={supplierName}
+                  onChange={(e) => setSupplierName(e.target.value)}
+                />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="text-sm font-medium text-gray-600 mb-2 block">Dịch vụ</label>
-                <Select>
+                <Select value={selectedService} onValueChange={setSelectedService}>
                   <SelectTrigger>
                     <SelectValue placeholder="Chọn dịch vụ" />
                   </SelectTrigger>
@@ -246,7 +259,7 @@ export default function SampleCollectionPage() {
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-600 mb-2 block">Người khác</label>
-                <Input placeholder="Người khác" />
+                <Input placeholder="Người khác" value={otherPerson} onChange={(e) => setOtherPerson(e.target.value)} />
               </div>
             </div>
 

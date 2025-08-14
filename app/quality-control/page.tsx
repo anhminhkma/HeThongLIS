@@ -142,6 +142,7 @@ export default function QualityControlPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [filterStatus, setFilterStatus] = useState("all")
   const [selectedDate, setSelectedDate] = useState("19/08/2024")
+  const [qcDate, setQcDate] = useState("2024-08-19")
 
   const filteredSamples = qualityControlSamples.filter((sample) => {
     const matchesSearch =
@@ -238,7 +239,7 @@ export default function QualityControlPage() {
                   <div className="flex space-x-4">
                     <div className="flex items-center space-x-2">
                       <label className="text-sm font-medium text-gray-600">Ngày:</label>
-                      <Input type="date" value="2024-08-19" className="w-40" />
+                      <Input type="date" value={qcDate} onChange={(e) => setQcDate(e.target.value)} className="w-40" />
                     </div>
                     <div className="flex items-center space-x-2">
                       <label className="text-sm font-medium text-gray-600">Máy XN:</label>
